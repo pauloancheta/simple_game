@@ -1,0 +1,39 @@
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.board {
+  height: 95vh;
+  padding: 10px;
+  border: 1px solid red;
+}
+
+.board_coord {
+  height: 100px;
+  width: 100px;
+  border: 1px solid blue;
+  display: inline-block;
+}
+
+#piece {
+  height: 100px;
+  width: 100px;
+  background-color: blue;
+}
+
+.spaceship {
+  position: fixed;
+  height: 75px;
+  width: 75px;
+  background-color: red;
+  bottom: 40px;
+}
+
+.bullet {
+  height: 5px;
+  width: 5px;
+  background-color: black;
+}
