@@ -1,14 +1,16 @@
 $(document).ready(function() {
+  var enemies = [$('.left'), $('.right')];
+
   var spaceship_location = function(){
     console.log($('.spaceship').height());
     console.log($('.spaceship').offset());
   }
 
-  var did_enemy_hit = function(){
-    var enemy_x1 = $('.board_coord').offset().left;
-    var enemy_x2 = $('.board_coord').offset().left + $('.board_coord').width();
-    var enemy_y1 = $('.board_coord').offset().top;
-    var enemy_y2 = $('.board_coord').offset().top + $('.board_coord').width();
+  var did_enemy_hit = function(enemy){
+    var enemy_x1 = enemy.offset().left;
+    var enemy_x2 = enemy.offset().left + $('.board_coord').width();
+    var enemy_y1 = enemy.offset().top;
+    var enemy_y2 = enemy.offset().top + $('.board_coord').width() - 10;
 
     var bullet_x1 = $('.bullet').offset().left;
     var bullet_x2 = $('.bullet').offset().left + $('.bullet').width();
@@ -24,14 +26,17 @@ $(document).ready(function() {
     }
   }
 
-  var hit_event = function(trajectory){
-    if(did_enemy_hit()){
-      $('.board_coord').fadeOut()
-      $('.bullet').fadeOut();
-      clearInterval(trajectory);
-      // create another bullet
-      $('.spaceship center').append('<div class="bullet"></div>');
+  var hit_event = function(trajectory, enemies){
+    for(var i = 0; i <=enemies.length; i++){
+      if( enemies[i] && did_enemy_hit(enemies[i]) ){
+        enemies[i].fadeOut(100)
+        $('.bullet').fadeOut(100);
+        clearInterval(trajectory);
+        // create another bullet
+        $('.spaceship center').append('<div class="bullet"></div>');
+      }
     }
+    
   }
 
   $(this).on('keydown', function(e){
@@ -46,7 +51,7 @@ $(document).ready(function() {
     else if(e.which == 32){
       var trajectory = setInterval(function() {
         $('.bullet').css('margin-top', '-=5px');
-        hit_event(trajectory);
+        hit_event(trajectory, enemies);
       }, 5);
 
       setTimeout(function() {
