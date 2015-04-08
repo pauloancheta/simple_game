@@ -1,11 +1,17 @@
 <div class="board">
-  <div class="board_coord left">
+
+  <% x = rand(10) + 1 %>
+  <div class="row">
+    <% while x > 0 %>
+      <% x = x-1 %>
+      
+        <div class="board_coord" id="<%= x %>"></div>
+      
+    <% end %>
   </div>
 
-  <div class="board_coord right">
-  </div>
 
   <div class="spaceship">
-  <center><div class="bullet"></div></center>
+    <center><div class="bullet"></div></center>
   </div>
 </div>

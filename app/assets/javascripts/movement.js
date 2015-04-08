@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  var enemies = [$('.left'), $('.right')];
+  var enemies = [$('#0'), $('#1'), $('#2'), $('#3'), $('#4'), $('#5'), $('#6'), $('#7'), $('#8'), $('#9'), $('#10')];
 
   var spaceship_location = function(){
     console.log($('.spaceship').height());
@@ -29,6 +29,7 @@ $(document).ready(function() {
   var hit_event = function(trajectory, enemies){
     for(var i = 0; i <=enemies.length; i++){
       if( enemies[i] && did_enemy_hit(enemies[i]) ){
+        // enemies[i].css('background-color', 'red');
         enemies[i].fadeOut(100)
         $('.bullet').fadeOut(100);
         clearInterval(trajectory);
@@ -40,16 +41,21 @@ $(document).ready(function() {
   }
 
   $(this).on('keydown', function(e){
+    var left = 37,
+        right = 39,
+        space = 32;
     console.log(e.which);
-    if(e.which == 37){
+    if(e.which == left){
       $('.spaceship').css('margin-left', '-=10x');
     }
-    else if(e.which == 39){
+    else if(e.which == right){
       $('.spaceship').css('margin-left', '+=10px');
     }
 
-    else if(e.which == 32){
+    else if(e.which == space){
+      var left = $('.bulet').css('margin-left');
       var trajectory = setInterval(function() {
+        $('.bullet').css('margin-left', left) // bullet trajectory is always straight
         $('.bullet').css('margin-top', '-=5px');
         hit_event(trajectory, enemies);
       }, 5);
