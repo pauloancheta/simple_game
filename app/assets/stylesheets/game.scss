@@ -27,13 +27,15 @@ html {
 .spaceship {
   position: fixed;
   height: 75px;
-  width: 75px;
-  background-color: red;
+  width: 99px;
+  // background-color: red;
   bottom: 40px;
+  background-image: image-url('playerShip1_red.png');
+  background-repeat: no-repeat;
 }
 
 .bullet {
-  height: 5px;
+  height: 20px;
   width: 5px;
-  background-color: black;
+  background-image: image-url('laserRed03.png');
 }
