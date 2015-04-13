@@ -11,17 +11,12 @@ html {
   border: 1px solid red;
 }
 
-.board_coord {
-  height: 100px;
-  width: 100px;
-  border: 1px solid blue;
+.enemy {
+  height: 80px;
+  width: 80px;
+  // border: 1px solid blue;
   display: inline-block;
-}
-
-#piece {
-  height: 100px;
-  width: 100px;
-  background-color: blue;
+  background-image: image-url('meteorBrown_big3.png');
 }
 
 .spaceship {
@@ -38,4 +33,9 @@ html {
   height: 20px;
   width: 5px;
   background-image: image-url('laserRed03.png');
+}
+
+td {
+  width: 80px;
+  height: 80px;
 }

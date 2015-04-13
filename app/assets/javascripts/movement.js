@@ -2,38 +2,49 @@ $(document).ready(function() {
   var enemies = [$('#0'), $('#1'), $('#2'), $('#3'), $('#4'), $('#5'), $('#6'), $('#7'), $('#8'), $('#9'), $('#10')];
   var enemy_hash = {};
 
-  // var enemy_locations = function() {
-  //   for(var i in enemies){
-      
+  var meteor_down = function(){
+    setInterval(function(){
+      $('table').css('margin-top', '+=10px');
+    }, 300);
+  }
+  meteor_down();
 
-  //   }
-  // }
+  var clear_bullet = function(trajectory){
+    var bullet_top = $('.bullet').offset().top;
+    if(bullet_top && bullet_top <= 19){
+      clearInterval(trajectory);
+      $('.bullet').remove();
+    }
+  }
 
   var did_enemy_hit = function(enemy){
-      var enemy_x1 = enemy.offset().left;
-      var enemy_x2 = enemy.offset().left + $('.board_coord').width();
-      var enemy_y1 = enemy.offset().top;
-      var enemy_y2 = enemy.offset().top + $('.board_coord').width() - 10;
+      if(typeof(enemy.offset()) !== "undefined" && typeof($('.bullet').offset()) !== "undefined"){
+        var enemy_x1 = enemy.offset().left;
+        var enemy_x2 = enemy.offset().left + $('.enemy').width();
+        var enemy_y1 = enemy.offset().top;
+        var enemy_y2 = enemy.offset().top + $('.enemy').width() - 10;
 
-      var bullet_x1 = $('.bullet').offset().left;
-      var bullet_x2 = $('.bullet').offset().left + $('.bullet').width();
-      var bullet_y1 = $('.bullet').offset().top;
-      var bullet_y2 = $('.bullet').offset().top + $('.bullet').width();
+        var bullet_x1 = $('.bullet').offset().left;
+        var bullet_x2 = $('.bullet').offset().left + $('.bullet').width();
+        var bullet_y1 = $('.bullet').offset().top;
+        var bullet_y2 = $('.bullet').offset().top + $('.bullet').width();  
 
-      if(bullet_x1 < enemy_x2 && bullet_x1 > enemy_x1){
-        if(bullet_y1 < enemy_y2){
-          return true;          
+        if(bullet_x1 < enemy_x2 && bullet_x1 > enemy_x1){
+          if(bullet_y1 < enemy_y2){
+            return true;          
+          }
         }
       }
-    
+      else{
+        return false
+      }
   }
 
   var hit_event = function(trajectory){
     for(var i = 0; i < enemies.length ; i++){
       if( did_enemy_hit(enemies[i]) ){
-        $('#'+i).css('border', 'white');
-        // enemies[i].fadeOut(100)
-        $('.bullet').fadeOut(100);
+        enemies[i].remove();
+        $('.bullet').remove();
         clearInterval(trajectory);
       }
     }
@@ -53,16 +64,11 @@ $(document).ready(function() {
 
     else if(e.which == space){
       $('.spaceship center').append('<div class="bullet"></div>');
-      var trajectory = setInterval(function() {
-   
+      var trajectory = setInterval(function() {   
         $('.bullet').css('margin-top', '-=5px');
+        clear_bullet(trajectory);
         hit_event(trajectory);
       }, 5);
-
-      setTimeout(function() {
-        clearInterval(trajectory);
-        $('.bullet').remove();
-      }, 1500);
     }
   });
 });
