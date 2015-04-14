@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  alert('Press left or right arrow key to move your spaceship and spacebar to shoot asteroids');
   var enemies = [];
   var enemy_id = 0;
 

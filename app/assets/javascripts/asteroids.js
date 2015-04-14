@@ -7,7 +7,8 @@ $(document).ready(function() {
       if( $('table').last().height() <= 10 ){
         $('table').last().remove();
       }
-      if( $('table').last().css('margin-top').replace("px", "") > 550 ){
+      if( typeof($('table').last().css('margin-top')) !== "undefined" && 
+          $('table').last().css('margin-top').replace("px", "") > 550 ){
         clearInterval(move);
         alert('DEAD!');
       }
