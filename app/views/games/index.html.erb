@@ -1,20 +1,19 @@
 <div class="board">
+ <% x = 0 %>
 
-  <% x = 10 %>
-
-  <table>
-    <tr>
-      <% while x > 0%>
-        <td>
-          <% y = rand(2) %>
-          <% if y > 0 %>
-            <div class="enemy" id="<%= x %>"></div>
-          <% end %>
-        </td>
-        <% x -= 1 %>
-      <% end %>
-    </tr>
-  </table>
+ <table>
+   <tr>
+     <% while x < 10 %>
+       <td>
+         <% y = rand(2) %>
+         <% if y > 0 %>
+           <div class="enemy" id="<%= x %>"></div>
+         <% end %>
+       </td>
+       <% x += 1 %>
+     <% end %>
+   </tr>
+ </table>
 
 
   <div class="spaceship">

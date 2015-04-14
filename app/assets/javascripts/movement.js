@@ -1,37 +1,45 @@
 $(document).ready(function() {
-  var enemies = [$('#0'), $('#1'), $('#2'), $('#3'), $('#4'), $('#5'), $('#6'), $('#7'), $('#8'), $('#9'), $('#10')];
-  var enemy_hash = {};
+  var enemies = [];
+  var enemy_id = 0;
 
-
-  var random_enemies = function(){
-    var x = Math.random() * 10;
-    return( "<table> </table>" );
+  for(var i = 0; i < 10; i++){
+    enemies.push( $('#' + i) );
   }
 
-  var append_enemies = function(){
-    setInterval(function(){
-      $('board').prepend();
-    });
-  }
+  // var random_enemies = function(){
+  //   var enemyRow = ""
+  //   for(var i = 0; i < 5; i++){
+  //     var x = Math.floor(Math.random() *10);
+  //     if(x < 5){
+  //       enemyRow = enemyRow + '<td></td>';
+  //     }
+  //     else{
+  //       enemyRow = enemyRow + '<td><div class="enemy" id="'+ enemy_id + '"></div></td>';
+  //       enemies[enemy_id] = ($( '#'+ enemy_id ));
+  //       enemy_id = enemy_id + 1;
+  //     }
 
-  var move_enemies = function(){
-    var move = setInterval(function(){
-      $('table').css('margin-top', '+=10px');
-      
-      if($('table').offset().top >= 600){
-        if( $('table').height() <= 10 ){
-          clearInterval(move);
-          $('table').remove();
-        }
-        else{
-          clearInterval(move);
-          alert('youre dead!');
-        }
-      }
-    }, 300);    
-  }
-  
-  move_enemies();
+  //   }
+  //   console.log(enemies[0]);
+  //   return enemyRow;
+  // }
+
+  // var append_enemies = function(){
+  //   var count = 0;
+  //   var new_enemy_row = setInterval(function(){
+  //     count +=1
+  //     var new_enemy = random_enemies();
+  //     $('.board').prepend('<table><tr>' + random_enemies() + '</tr></table>');
+
+  //     if(count == 2){
+  //       clearInterval(new_enemy_row);
+  //     }
+  //   }, 5000);
+
+
+  // }
+
+  // append_enemies();
 
   var clear_bullet = function(trajectory){
     var bullet_top = $('.bullet').offset().top;
@@ -65,7 +73,7 @@ $(document).ready(function() {
   }
 
   var hit_event = function(trajectory){
-    for(var i = 0; i < enemies.length ; i++){
+    for(var i in enemies){
       if( did_enemy_hit(enemies[i]) ){
         enemies[i].remove();
         $('.bullet').remove();
@@ -89,7 +97,7 @@ $(document).ready(function() {
     else if(e.which == space){
       $('.spaceship center').append('<div class="bullet"></div>');
       var trajectory = setInterval(function() {   
-        $('.bullet').css('margin-top', '-=5px');
+        $('.bullet').css('margin-top', '-=10px');
         clear_bullet(trajectory);
         hit_event(trajectory);
       }, 5);
