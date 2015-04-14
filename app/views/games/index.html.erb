@@ -3,15 +3,17 @@
   <% x = 10 %>
 
   <table>
-    <% while x > 0%>
-      <td>
-        <% y = rand(2) %>
-        <% if y > 0 %>
-          <div class="enemy" id="<%= x %>"></div>
-        <% end %>
-      </td>
-      <% x -= 1 %>
-    <% end %>
+    <tr>
+      <% while x > 0%>
+        <td>
+          <% y = rand(2) %>
+          <% if y > 0 %>
+            <div class="enemy" id="<%= x %>"></div>
+          <% end %>
+        </td>
+        <% x -= 1 %>
+      <% end %>
+    </tr>
   </table>
 
 

@@ -2,12 +2,36 @@ $(document).ready(function() {
   var enemies = [$('#0'), $('#1'), $('#2'), $('#3'), $('#4'), $('#5'), $('#6'), $('#7'), $('#8'), $('#9'), $('#10')];
   var enemy_hash = {};
 
-  var meteor_down = function(){
-    setInterval(function(){
-      $('table').css('margin-top', '+=10px');
-    }, 300);
+
+  var random_enemies = function(){
+    var x = Math.random() * 10;
+    return( "<table> </table>" );
   }
-  meteor_down();
+
+  var append_enemies = function(){
+    setInterval(function(){
+      $('board').prepend();
+    });
+  }
+
+  var move_enemies = function(){
+    var move = setInterval(function(){
+      $('table').css('margin-top', '+=10px');
+      
+      if($('table').offset().top >= 600){
+        if( $('table').height() <= 10 ){
+          clearInterval(move);
+          $('table').remove();
+        }
+        else{
+          clearInterval(move);
+          alert('youre dead!');
+        }
+      }
+    }, 300);    
+  }
+  
+  move_enemies();
 
   var clear_bullet = function(trajectory){
     var bullet_top = $('.bullet').offset().top;
